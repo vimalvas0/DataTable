@@ -18,7 +18,7 @@
 
 <div class="center">
 
-  <form action="../../private/methods/crud_update.php?id=<?php echo $_REQUEST['id'];?>" method="post">
+  <form action="../../private/methods/crud_update.php?id=<?php echo $_REQUEST['id'];?>" method="post" enctype="multipart/form-data">
     <fieldset class="disabled">
     <div class="form-group">
       <label for="disabledTextInput">UserId</label>

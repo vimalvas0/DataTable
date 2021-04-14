@@ -15,7 +15,7 @@
 
 <div class="center">
 
-  <form action="../../private/methods/crud_create.php" method="post">
+  <form action="../../private/methods/crud_create.php" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label for="name">Name</label>
       <input name="name" type="text" class="form-control" placeholder="Enter Name">
@@ -51,7 +51,7 @@
 
     <br>
 
-    <button type="submit" class="btn btn-primary">Add</button>
+    <button name="submit" type="submit" class="btn btn-primary">Add</button>
   </form>
 
 </div>

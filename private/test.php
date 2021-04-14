@@ -3,15 +3,16 @@
 <!-- Trying to upload file in php -->
 <!-- ERROR : Permission denid -->
 
-<!-- ?php echo exec('whoami');
+<?php echo exec('whoami');
 
+	echo "<br>";
 
-
-	// if(isset($_FILES['my_file']))
+	if($_FILES)
+	{
 	// {
 	// 	echo $_FILES['my_file']['tmp_name'];
 
-	// 	$target_dir = "./";
+	// 	$target_dir = "IMAGES_PATH";
 	// 	$file = $_FILES['my_file']['name'];
 	// 	$path = pathinfo($file);
 	// 	$filename = $path['filename'];
@@ -24,15 +25,18 @@
 	// 		move_uploaded_file($temp_name,$path_filename_ext);
 	// 		echo "Congratulations! File Uploaded Successfully.";
 	// 	}
-			
-	// }
-	
-?>
- -->
 
-<!-- <form name="form" method="post" action="test.php" enctype="multipart/form-data" >
+
+		echo "<pre>";
+		print_r($_FILES);
+		echo "</pre>";
+	}
+?>
+
+
+<form name="form" method="post" action="test.php" enctype="multipart/form-data" >
 	<input type="file" name="my_file" /><br /><br />
-	<input type="submit" name="submit" value="Upload"/>
+	<input type="submit" name="submit"/>
 </form>
 
- -->
+

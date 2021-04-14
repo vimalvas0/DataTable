@@ -42,18 +42,18 @@
 			// Dynamically Filling the table
 			while($row = mysqli_fetch_assoc($allEntries))
 			{
+				$id = $row['Id'];
 				echo '<tr>
 					<td>'. $row['Id'] . '</td>
 					<td>' .$row['Name'] . '</td>
 					<td>' .$row['Email'] . '</td>
 					<td>' .$row['Phone'] . '</td>
-					<td>' .$row['Role'] . '</td>
-					<td><a name="some" href="href" onclick="test.php">' . $row['ProfilePhoto'] .'</a>';
+					<td>' .$row['Role'] . '</td>';
+				echo "<td><a href='./forms/form_profile.php?id=" . $row['Id'] . "'>". $row['ProfilePhoto'] . " </a>";
 				echo "<td><a href='./forms/form_update.php?id=" . $row['Id'] . "'>Edit</a>";
 				echo "<td><a href='./forms/form_remove.php?id=" . $row['Id'] . "'>Remove</a>
 				</tr>";
 			}
-	
 		 ?>
 	</tbody>
 </table>
