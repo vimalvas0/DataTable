@@ -117,14 +117,19 @@ function saveImage($IMAGE_FILE, $username)
 		echo "Maximum fize size limit : 2 MB <br>";
 	}
 
+	$timestamp = time() . '-'  . date("Y-m-d");
 
-	$imageName = $username . "." . $imageExt;
+	$imageName = $username . '-' . $timestamp  . "." . $imageExt;
+
+	$timestamp = time() . '-'  . date("Y-m-d");
 	// echo $imageName;
 
 	$tempDir = $IMAGE_FILE['tmp_name'];
 
 	$targetDir = IMAGES_PATH . "/$username";
 	$path_file_ext = $targetDir . "/$imageName";
+
+
 
 	// echo $path_file_ext;
 	// echo $tempDir;
@@ -145,7 +150,7 @@ function saveImage($IMAGE_FILE, $username)
 	}
 
 
-	$fileData = [$targetDir, $path_file_ext];
+	$fileData = [$targetDir, $path_file_ext, $timestamp, $username];
 
 	return $fileData;
 
@@ -158,10 +163,12 @@ function resizeAndSaveImages($FILE_DATA)
 {
 	$pathDir = $FILE_DATA[0];
 	$path_file_ext = $FILE_DATA[1];
+	$timestamp = $FILE_DATA[2];
+	$username = $FILE_DATA[3];
 
 	$filename_ext = basename($path_file_ext);
 
-	$filename = explode('.', $filename_ext)[0];
+	// $filename = explode('.', $filename_ext)[0];
 	$ext= explode('.', $filename_ext)[1];
 
 	// echo "$pathDir <br> $path_file_ext";
@@ -191,7 +198,7 @@ function resizeAndSaveImages($FILE_DATA)
 	foreach($sizes as $size => $figure)
 	{
 		$scaled = imagescale($resource, $figure);
-		imagejpeg($scaled, $pathDir . "/$filename" . '_' . $size . '.jpg', 65);
+		imagejpeg($scaled, $pathDir . "/$username" . "-" . $timestamp  . '_' . $size . '.jpg', 65);
 		imagedestroy($scaled);
 	}
 
@@ -199,8 +206,7 @@ function resizeAndSaveImages($FILE_DATA)
 
 	echo "Imaged resized and done";
 
-	return $filename . '_small' . '.jpg';
-
+	return $username . '-' . $timestamp . '_small' . '.jpg';
 
 }
 
