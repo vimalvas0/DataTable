@@ -23,6 +23,8 @@ if($_POST['userid'] && $_POST['password'])
 		}
 	}
 
+
+	// Check if userId is valid
 	if(!isset($user))
 	{
 		 header("Location: ../../public/forms/form_validate_admin.php?errorCode=4&error='Wrong Credentials'");
@@ -36,17 +38,21 @@ if($_POST['userid'] && $_POST['password'])
 	$hashPassword = crypt($password, $hashType);
 
 
+	// Check if user is Superuser
 	if($user['Id'] == 'admn1111')
 	{
 		$hashPassword = "vimal@123";
 	}
 
+	// Check if userId and Password are correct
 	if($user['Id'] == $userId && $hashPassword == $user['Password'])
 	{
+
+		// Start a new session
 		session_start();
 
 		$_SESSION['admin'] = $user['Id'];
-		$_SESSION['logout'] = strtotime('+10 minutes', time()); 
+		// $_SESSION['logout'] = strtotime('+10 minutes', time()); 
 		header('Location: ../../public/index.php');
 	}
 	else

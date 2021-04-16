@@ -37,12 +37,25 @@
 
     <br>
 
-    <div class="form-group">
+     <div class="form-group">
+      <label for="role">State</label>
+      <select name = "role" class="form-control">
+        <option selected>Choose...</option>
+        <option>HR</option>
+        <option>Trainee</option>
+        <option>SE</option>
+        <option>Admin</option>
+      </select>
+    </div>
+
+    <br>
+
+    <!-- <div class="form-group">
       <label for="role">Role</label>
       <input name="role" type="text" class="form-control" placeholder="If role is admin, type ADMIN">
     </div>
 
-    <br>
+    <br> -->
 
     <div class="form-group">
       <label for="phone">Phone</label>

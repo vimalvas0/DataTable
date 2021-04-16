@@ -23,13 +23,20 @@
 
 if(isset($_SESSION['admin']))
 {
-	echo '<div class="card">
+	echo '<div class="card" style="float : right;">
   	<div style="color : green" class="card-body">
   		User logged in as : ' . $_SESSION['admin'];
   	echo '</div>
 	</div>';
 
-	echo '<hr>';
+	echo '<a style="float : right; margin-right : 10px; padding : 1rem 2em;" href="index.php?logout=yes" class="btn btn-danger" role="button" aria-pressed="true">Logout</a>';
+
+	$i = 1;
+	while($i < 7)
+	{
+		echo '<br>';
+		$i++;
+	}
 }
 
 
@@ -96,13 +103,10 @@ if(isset($_SESSION['admin'])){
 
 <?php 
 
-if(isset($_SESSION['logout']))
+if(isset($_SESSION['admin']) && isset($_REQUEST['logout']))
 {
-	if( time() > $_SESSION['logout'])
-	{
-		session_destroy();
-	    header("Location: index.php"); 
-	}
+	session_destroy();
+    header("Location: index.php"); 
 }
 
 ?>
