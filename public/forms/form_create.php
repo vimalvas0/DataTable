@@ -31,8 +31,15 @@
     <br>
 
     <div class="form-group">
+      <label for="password">Password</label>
+      <input name="password" type="password" class="form-control" placeholder="Password only required for Admin account">
+    </div>
+
+    <br>
+
+    <div class="form-group">
       <label for="role">Role</label>
-      <input name="role" type="text" class="form-control" placeholder="Your Role">
+      <input name="role" type="text" class="form-control" placeholder="If role is admin, type ADMIN">
     </div>
 
     <br>
