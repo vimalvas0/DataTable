@@ -8,6 +8,8 @@
 
 
 <?php 
+
+	session_start();
 	// All the entries in the databse's table
 	$allEntries = allEntries();
 ?>
@@ -15,12 +17,33 @@
 
 <!-- HTML DOC -->
 
-<div>
 
-	<p><b>Add New User : <a href="./forms/form_create.php">+ New User</a></b></p>
-	
 
-</div>
+<?php
+
+if(isset($_SESSION['admin']))
+{
+	echo '<div class="card">
+  	<div style="color : green" class="card-body">
+  		User logged in as : ' . $_SESSION['admin'];
+  	echo '</div>
+	</div>';
+
+	echo '<hr>';
+}
+
+
+
+if(isset($_SESSION['admin'])){
+	echo "<p><b> Add New User : <a href='./forms/form_create.php'>+ New User</a></b></p>";
+}else
+{
+	 echo "<p style='color : grey'>  🚫 You cannot edit this table. Only Admin has rights to edit. Use this link switch to Admin : <a href='./forms/form_validate_admin.php?request=admin'>Login to Admin</a></p>";
+}
+
+
+?>
+
 
 
 <table class="table table-striped">
@@ -43,21 +66,45 @@
 			while($row = mysqli_fetch_assoc($allEntries))
 			{
 				$id = $row['Id'];
-				echo '<tr>
+				if($id != 'admn1111')
+				{
+					echo '<tr>
 					<td>'. $row['Id'] . '</td>
 					<td>' .$row['Name'] . '</td>
 					<td>' .$row['Email'] . '</td>
 					<td>' .$row['Phone'] . '</td>
 					<td>' .$row['Role'] . '</td>';
-				echo "<td><a href='./forms/form_profile.php?id=" . $row['Id'] . "'>". $row['ProfilePhoto'] . " </a>";
-				echo "<td><a href='./forms/form_update.php?id=" . $row['Id'] . "'>Edit</a>";
-				echo "<td><a href='./forms/form_remove.php?id=" . $row['Id'] . "'>Remove</a>
-				</tr>";
+					echo "<td><a href='./forms/form_profile.php?id=" . $row['Id'] . "'>". $row['ProfilePhoto'] . " </a>";
+
+					if(isset($_SESSION['admin']))
+					{
+						echo "<td><a href='./forms/form_update.php?id=" . $row['Id'] . "'>Edit</a>";
+						echo "<td><a href='./forms/form_remove.php?id=" . $row['Id'] . "'>Remove</a>
+						</tr>";
+					}else
+					{
+						echo "<td><p style='color : red'>Not Allowed</td>";
+						echo "<td><p style='color : red'>Not Allowed</td>";
+					}
+				}	
+				
 			}
 		 ?>
 	</tbody>
 </table>
 
 
+<?php 
+
+if(isset($_SESSION['logout']))
+{
+	if( time() > $_SESSION['logout'])
+	{
+		session_destroy();
+	    header("Location: index.php"); 
+	}
+}
+
+?>
 
 <?php require(UTILS_PATH . "/footer.php"); ?>

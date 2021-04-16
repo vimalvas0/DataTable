@@ -11,6 +11,26 @@
 	$role = $_REQUEST['role'];
 	$username = substr($name, 0, 4) . substr($phone, -4);
 
+	$password = $_REQUEST['password'];
+	$hashPassword = "";
+
+
+	// Hashing password
+
+	if(!strcasecmp($role, 'Admin'))
+	{
+		$hashFormat = "$2a$10";    // Check Documentation - Blowfish function
+
+
+		$salt = '$stringThatMakesMyPWSecure$';
+
+
+		$hashType = $hashFormat . $salt;
+
+
+		$hashPassword = crypt($password, $hashType);
+	}
+
 
 
 	if(!$_FILES['file'])
@@ -28,7 +48,7 @@
 	$fileName = resizeAndSaveImages($FILE_DATA);
 
 
-	createEntry($username, $name, $email, $phone, $role, $fileName);
+	createEntry($username, $name, $email, $phone, $role, $fileName, $hashPassword);
 
 
 	echo "Profile Created! <br>";

@@ -15,14 +15,14 @@ function allEntries()
 
 
 // Create all the entries
-function createEntry($username, $name, $email, $phone, $role, $image)
+function createEntry($username, $name, $email, $phone, $role, $image, $password)
 {
 	global $connection;
 
 	if($connection) echo'Connection exists...';
 
-	$query = "INSERT INTO employee (Id, Name, Email, Phone, Role, ProfilePhoto) ";
-	$query .= "VALUES ('$username', '$name', '$email', '$phone', '$role', '$image') ";
+	$query = "INSERT INTO employee (Id, Name, Email, Phone, Role, ProfilePhoto, Password) ";
+	$query .= "VALUES ('$username', '$name', '$email', '$phone', '$role', '$image', '$password') ";
 
 	$result = mysqli_query($connection, $query);
 
